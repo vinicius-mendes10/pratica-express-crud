@@ -1,0 +1,65 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<main>
+  <h1>
+    <%= title %>
+  </h1>
+  <section>
+    <h2>Usuários</h2>
+    <% if (locals.usuarios) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>email</th>
+          <th>Idade</th>
+          <th>Admin</th>
+          <th>Controles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let usuario of usuarios) { %>
+        <tr>
+          <td>
+            <img src="/images/<%= usuario.avatar ? `avatar/${usuario.avatar}` : 'avatar-null.png' %>" alt="Avatar <%= usuario.nome %>" height="60" width="60" style="border-radius:50%;width:60px;height:60px;">
+          </td>
+          <td>
+            <%= usuario.id %>
+          </td>
+          <td>
+            <%= usuario.nome %>
+          </td>
+          <td>
+            <%= usuario.sobrenome %>
+          </td>
+          <td>
+            <%= usuario.email %>
+          </td>
+          <td>
+            <%= usuario.idade %>
+          </td>
+          <td>
+            <%= usuario.admin %>
+          </td>
+          <td>
+            <a href="/usuarios/<%= usuario.id %>">ver</a> | <a href="/usuarios/<%= usuario.id %>/editar">editar</a>
+            | <a href="/usuarios/<%= usuario.id %>/apagar">excluir</a>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <div>
+      <h3>Ops... parece que não há usuários cadastrados ainda.</h3>
+    </div>
+    <% } %>
+  </section>
+  <div>
+    <a href="/">Página Inicial</a> | <a href="/usuarios/adicionar">Adicionar Usuário</a>
+  </div>
+</main>
+<%- include('partials/footer') %>
